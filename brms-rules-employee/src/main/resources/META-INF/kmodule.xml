@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<kmodule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.drools.org/xsd/kmodule">
+	<configuration>
+		<property key="drools.propertySpecific" value="ALWAYS" />
+	</configuration>
+
+	<kbase name="diversionKieBase" default="false" packages="com.sunilsamuel.diversion.rules" includes="customerKieBase">
+		<ksession name="diversionStateLess" default="false" type="stateless" />
+	</kbase>
+</kmodule>

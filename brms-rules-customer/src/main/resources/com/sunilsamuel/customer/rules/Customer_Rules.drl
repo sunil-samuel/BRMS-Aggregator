@@ -1,0 +1,14 @@
+package com.sunilsamuel.customer.rules;
+
+import com.sunilsamuel.simple.brms.model.Employee;
+
+rule "Process Customer"
+ruleflow-group "Customer"
+when
+	$employee : Employee (customer)
+
+then
+	modify ($employee) {
+		setBonus (100.40d)
+	}
+end

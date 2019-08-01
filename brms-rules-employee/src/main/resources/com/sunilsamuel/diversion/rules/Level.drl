@@ -1,0 +1,41 @@
+package com.sunilsamuel.diversion.rules
+
+import com.sunilsamuel.simple.brms.model.Employee
+
+query "get_employee" ()
+    $employee: Employee()
+end
+
+
+/*****************************************************************
+ *
+ * ruleflow-group Entry-Level, Junior-Level, Senior-Level
+ * Based on the employee status (either Entry, Junior, or Senior)
+ * set the initial (base) salary for the employee.
+ *
+ ****************************************************************/
+rule "Entry Level Employee"
+ruleflow-group "Entry-Level"
+when
+	$employee : Employee (status == "Entry")
+then
+	$employee.setSalary(35000.00);
+end
+
+
+rule "Junior Level Employee"
+ruleflow-group "Junior-Level"
+when
+	$employee : Employee (status == "Junior")
+then
+	$employee.setSalary(55000.00);
+end
+
+
+rule "Senior Level Employee"
+ruleflow-group "Senior-Level"
+when
+	$employee : Employee (status == "Senior")
+then
+	$employee.setSalary(100000.00);
+end

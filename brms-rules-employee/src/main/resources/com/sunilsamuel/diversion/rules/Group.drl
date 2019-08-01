@@ -1,0 +1,46 @@
+package com.sunilsamuel.diversion.rules
+
+import com.sunilsamuel.simple.brms.model.Employee
+
+/*****************************************************************
+ *
+ * ruleflow-group Group
+ * These group rules, based on the group will increase their
+ * currenty salary give a percentage.  That is,
+ * group A = 25% increase in salary
+ * group B = 28% increase in salary
+ * group C = 30% increase in salary
+ *
+ ****************************************************************/
+rule "Process Group A"
+ruleflow-group "Group"
+when
+    $employee : Employee (group == "A")
+then
+    // Group A gets 25% increase
+    modify ($employee) {
+        setSalary($employee.getSalary() * 1.25)
+    }
+end
+
+rule "Process Group B"
+ruleflow-group "Group"
+when
+    $employee : Employee (group == "B")
+then
+    // Group B gets 28% increase
+    modify ($employee) {
+    	setSalary($employee.getSalary() * 1.28)
+    }
+end
+
+rule "Process Group C"
+ruleflow-group "Group"
+when
+    $employee : Employee (group == "C")
+then
+    // Group C gets 30% increase
+    modify ($employee) {
+    	setSalary($employee.getSalary() * 1.30)
+    }
+end    
