@@ -64,6 +64,57 @@ included via maven pom.
 The `kmodule.xml` definition above `includes` the dependent KieBase.  Once that is done, 
 then we can use this into the BPMN process.  For additional information, inspect the BPMN. 
 
+# Testing Framework
+The testing framework within the `rules-test-support` project can be used to test the BRMS project within the BDD Cucumber framework.  The `RulesEngineSupport` class supports testing the rules as a BPMN Process, BPMN Task (ruleflow group), and as an individual rule basis.
+
+## Testing BPMN Process
+The BPMN Process can be tested end-to-end by using the Process Id.
+
+```
+rulesEngineSupport = new RulesEngineSupport();
+rulesEngineSupport.addFact(employee);
+rulesEngineSupport.setSessionName("customerStatefulSession");
+//
+// Set the Process Id name (name of the BPMN id)
+//
+rulesEngineSupport.addProcess("com.sunilsamuel.diversion.rules.process");
+rulesEngineSupport.setDebug(false);
+rulesEngineSupport.fireRules();
+rulesEngineSupport.executeRules();
+```
+
+## Testing BPMN Task (Ruleflow Group)
+The BPMN Task can be tested using the `ruleflow-group` name.
+
+```
+rulesEngineSupport = new RulesEngineSupport();
+rulesEngineSupport.addFact(employee);
+rulesEngineSupport.setSessionName("customerStatefulSession");
+//
+// Set the ruleflow-group name
+//
+rulesEngineSupport.setRuleFlowName("Customer");
+rulesEngineSupport.setDebug(false);
+rulesEngineSupport.fireRules();
+rulesEngineSupport.executeRules();
+```
+
+## Individual Rule
+Each individual rule can be tested by activating the rule name.
+
+```
+rulesEngineSupport = new RulesEngineSupport();
+rulesEngineSupport.addFact(employee);
+rulesEngineSupport.setSessionName("customerStatefulSession");
+//
+// Set the name of the rule to activate
+//
+rulesEngineSupport.setRuleNameToActivate("Process Customer");
+rulesEngineSupport.setDebug(false);
+rulesEngineSupport.fireRules();
+rulesEngineSupport.executeRules();
+```
+
 # Technology Stack
 
 * BRMS

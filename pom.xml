@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
@@ -13,8 +14,11 @@
 
 	<!-- P R O P E R T I E S -->
 	<properties>
-		<kie.version>7.18.0.Final-redhat-00004</kie.version>
-		<cucumber.version>4.3.1</cucumber.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- See https://access.redhat.com/solutions/3363991 for version support -->
+		<!-- <kie.version>7.18.0.Final-redhat-00004</kie.version> -->
+		<kie.version>7.33.0.Final-redhat-00002</kie.version>
+		<cucumber.version>5.6.0</cucumber.version>
 		<codehaus.jackson.version>1.9.13</codehaus.jackson.version>
 		<javaassist.version>3.19.0-GA</javaassist.version>
 		<slf4j.version>1.7.26</slf4j.version>
@@ -27,6 +31,7 @@
 		<module>brms-rules-customer</module>
 		<module>brms-rules-employee</module>
 		<module>brms-rules-domain</module>
+		<module>brms-rules-test-support</module>
 	</modules>
 
 	<!-- D E P E N D E N C Y - M A N A G E M E N T -->
@@ -48,7 +53,12 @@
 				<artifactId>brms-rules-domain</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>com.sunilsamuel.simple.brms</groupId>
+				<artifactId>brms-rules-test-support</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
 			<!-- K I E - D E P E N D E N C I E S -->
 			<!-- https://mvnrepository.com/artifact/org.kie/kie-bom -->
 			<dependency>
@@ -78,12 +88,18 @@
 				<scope>test</scope>
 			</dependency>
 
-			<!-- J U N I T - D E P E N D E N C I E S -->
-			<!-- https://mvnrepository.com/artifact/junit/junit -->
+			<!-- C U C U M B E R - D E P E N D E N C I E S -->
+			<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
 			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.12</version>
+				<groupId>io.cucumber</groupId>
+				<artifactId>cucumber-java</artifactId>
+				<version>${cucumber.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+			<dependency>
+				<groupId>io.cucumber</groupId>
+				<artifactId>cucumber-junit</artifactId>
+				<version>${cucumber.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<!-- S L F 4 J -->
@@ -104,7 +120,8 @@
 	</dependencyManagement>
 	<build>
 		<!-- This pluginManagement is used to fix the following Eclipse error: -->
-		<!-- Plugin execution not covered by lifecycle configuration: org.kie:kie-maven-plugin:xxx.Final:build (execution: default-build, phase: compile) -->
+		<!-- Plugin execution not covered by lifecycle configuration: org.kie:kie-maven-plugin:xxx.Final:build 
+			(execution: default-build, phase: compile) -->
 		<pluginManagement>
 			<plugins>
 				<plugin>

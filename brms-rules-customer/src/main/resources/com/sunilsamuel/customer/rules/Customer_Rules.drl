@@ -6,7 +6,6 @@ rule "Process Customer"
 ruleflow-group "Customer"
 when
 	$employee : Employee (customer)
-
 then
 	modify ($employee) {
 		setBonus (100.40d)
